@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenangan Kita - Special Memories Website</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFFBF7',
+                        warmRose: '#F4E3E3',
+                        blush: '#E8B4B8',
+                        dustyPink: '#D2919B',
+                        romanticRed: '#A3485E',
+                        softGray: '#F7F5F0',
+                        deepCharcoal: '#2D2727'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FFFBF7;
+            color: #2D2727;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 180, 184, 0.3);
+        }
+        .polaroid-card {
+            background: white;
+            padding: 12px 12px 20px 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .polaroid-card:hover {
+            transform: translateY(-6px) rotate(1deg);
+            box-shadow: 0 20px 30px -10px rgba(163, 72, 94, 0.15);
+        }
+        /* Sticky Note Styles */
+        .sticky-note-yellow { background-color: #FEF3C7; color: #78350F; border: 1px solid #FDE68A; }
+        .sticky-note-pink { background-color: #FCE7F3; color: #831843; border: 1px solid #FBCFE8; }
+        .sticky-note-green { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+        .sticky-note-blue { background-color: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD; }
+        .sticky-note-purple { background-color: #F3E8FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8B4B8;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-card border-b border-blush/20 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-blush/30 flex items-center justify-center text-romanticRed">
+                    <i class="fa-solid fa-heart text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-lg text-romanticRed leading-tight">Kenangan Kita</h1>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Album Kenangan & Pesan Kesan</p>
+                </div>
+            </div>
+            
+            <div class="text-xs text-romanticRed font-semibold bg-warmRose px-3 py-1.5 rounded-full">
+                ✨ Special Memories for Kak Juan
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto px-4 pt-8 pb-4 text-center">
+        <div class="inline-block mb-3 px-3 py-1 bg-warmRose text-romanticRed rounded-full text-xs font-semibold tracking-wide uppercase">
+            ✨ Ruang Cerita Spesial
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-deepCharcoal mb-3">
+            Abadikan Setiap Rangkaian Momen
+        </h2>
+        <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto mb-5">
+            Koleksi foto indah beserta catatan pesan dan kesan berharga untuk Kak Juan.
+        </p>
+
+        <div class="inline-flex items-center gap-2 bg-softGray border border-blush/40 px-3.5 py-1.5 rounded-2xl text-xs text-gray-600 shadow-xs mb-2">
+            <i class="fa-solid fa-qrcode text-romanticRed text-sm"></i>
+            <span>Scan barcode untuk melihat galeri kenangan bersama</span>
+        </div>
+    </section>
+
+    <!-- Filter, Search & View Controls -->
+    <section class="max-w-4xl mx-auto px-4 py-4">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white/70 p-3 rounded-2xl border border-blush/20 shadow-xs">
+            
+            <div class="flex gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 no-scrollbar" id="categoryFilter">
+                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded-xl text-xs font-medium bg-romanticRed text-white whitespace-nowrap transition">Semua</button>
+                <button onclick="filterCategory('Pesan')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">💌 Pesan & Kesan</button>
+            </div>
+
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <div class="relative flex-1 sm:w-44">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari pesan / pengirim..." class="w-full pl-8 pr-3 py-1.5 bg-white border border-blush/30 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-xs text-gray-400"></i>
+                </div>
+                <div class="flex bg-softGray p-1 rounded-xl border border-blush/20">
+                    <button id="btnGridView" onclick="switchView('grid')" title="Tampilan Grid Polaroid" class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white shadow-xs text-romanticRed">
+                        <i class="fa-solid fa-border-all"></i>
+                    </button>
+                    <button id="btnTimelineView" onclick="switchView('timeline')" title="Tampilan Timeline Urutan Waktu" class="px-2.5 py-1 rounded-lg text-xs font-medium text-gray-500 hover:text-romanticRed">
+                        <i class="fa-solid fa-timeline"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Gallery Container -->
+    <main class="max-w-4xl mx-auto px-4 mt-2">
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+        <div id="timelineView" class="hidden relative border-l-2 border-blush/50 ml-3 sm:ml-28 my-6 space-y-6"></div>
+
+        <div id="emptyState" class="hidden text-center py-16 px-4">
+            <div class="w-16 h-16 mx-auto mb-3 bg-warmRose/60 rounded-full flex items-center justify-center text-romanticRed text-2xl">
+                <i class="fa-regular fa-images"></i>
+            </div>
+            <h3 class="font-serif font-bold text-base text-deepCharcoal mb-1">Pesan Tidak Ditemukan</h3>
+            <p class="text-xs text-gray-500 max-w-xs mx-auto">Coba cari dengan nama pengirim atau kata kunci lain.</p>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+            <button onclick="closeLightbox()" class="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="overflow-y-auto">
+                <div class="relative bg-black flex items-center justify-center min-h-[240px] max-h-[420px]">
+                    <img id="lightboxImg" src="" alt="Detail Momen" class="max-h-[420px] w-full object-contain">
+                    <button id="prevImgBtn" onclick="navigateLightboxImage(-1)" class="absolute left-3 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hidden hover:bg-black/80">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="nextImgBtn" onclick="navigateLightboxImage(1)" class="absolute right-3 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hidden hover:bg-black/80">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <div id="imgDots" class="absolute bottom-2 flex gap-1 justify-center w-full"></div>
+                </div>
+
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between items-start gap-2">
+                        <div>
+                            <span id="lightboxCategory" class="px-2.5 py-0.5 bg-warmRose text-romanticRed text-[10px] font-semibold rounded-full"></span>
+                            <h2 id="lightboxTitle" class="font-serif font-bold text-lg text-deepCharcoal mt-1"></h2>
+                        </div>
+                        <span id="lightboxDate" class="text-xs text-gray-500 flex items-center gap-1 shrink-0 mt-1">
+                            <i class="fa-regular fa-calendar"></i> <span></span>
+                        </span>
+                    </div>
+
+                    <div id="lightboxNoteBox" class="p-4 rounded-2xl relative shadow-xs">
+                        <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full shadow-sm border border-white flex items-center justify-center text-[8px] text-white">📌</div>
+                        <span id="lightboxNoteAuthor" class="text-[11px] font-bold block mb-1"></span>
+                        <p id="lightboxDescription" class="text-xs sm:text-sm italic leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        const memories = [
+            {
+                id: 'mem_1',
+                title: 'Pesan dari Cantika',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Cantika',
+                noteStyle: 'sticky-note-pink',
+                description: '“terima kasih terima kasih dan terima kasih kak juan, God bless di manapun, intinya inpo loker.” ~ from cancan:,)',
+                images: ['Foto1 (1).jpeg']
+            },
+            {
+                id: 'mem_2',
+                title: 'Pesan dari Jimi',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Jimi',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Yo Kak, bertahun tahun kita udah jalan bareng di CG sampe kk jadi CGL .\nKalau dipikir-pikir udah banyak banget momen yang kita lewatin. Dari yang ketawa-tawa, bercanda ga jelas, sharing, doa bareng, sampai hal-hal kecil yang mungkin waktu itu terasa biasa aja, tapi sekarang malah jadi hal yang bakal dikangenin.\n\nJujur sedih banget pas tau kakak bakal pergi kerja di luar kota. Rasanya kayak nanti ada yang kurang. Apalagi dari 2022 sampai sekarang udah terbiasa ada Kak Juan di antara kita, terus sekarang harus mulai terbiasa sama keadaan yang beda.\n\nMakasih ya kak, buat semua kebersamaannya, Makasih udah jadi bagian dari perjalanan CG ini, dan Tetap setia melayani bareng bareng walaupun kadang kk pasti dalam kondisi yang random kadang happy kadang sedih karna hal lain,thx bro udah jadi teman, kakak, dan orang yang bertumbuh bareng sama kita. Mungkin kita ga selalu ngomong hal-hal kayak gini secara langsung, tapi kehadiran kakak selama ini berarti banget buat aku sih kak.\n\nSemoga di tempat yang baru nanti Tuhan selalu jagain Kak Juan. Semoga pekerjaannya dilancarkan, dipertemukan sama orang-orang yang baik, dan apa pun yang kakak kerjakan di sana Tuhan berkati. Kalau nanti ada masa-masa capek atau ngerasa sendirian, jangan lupa kalau di sini masih ada kita yang selalu dukung dan doain u bro.\n\nSEMANGAT di tempat yang baru dan pastinya suasana baru tetap bertumbuh didalam Tuhan dan tidak lupa dengan mengerjakan misi kita di ladang yang Baru yang Tuhan sediakan.\nNo matter how far life takes you, you’ll always have a home and a family here with us. This isn’t goodbye,It’s just ‘see you again someday.\n\nGodBlessYu🤍',
+                images: ['Foto1 (2).jpeg']
+            },
+            {
+                id: 'mem_3',
+                title: 'Pesan dari Aris',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Aris',
+                noteStyle: 'sticky-note-green',
+                description: 'Semangat buat perjalanan barunya ya, Kak Juan! 🔥\nWalaupun belum terlalu sering ngobrol, semoga ke depannya makin banyak hal baik yang Kak Juan alami di tempat yang baru. Sukses buat kerjaannya, dan semoga pelayanannya juga makin menyala di mana pun Tuhan tempatkan! 🙌🏻😎',
+                images: ['Foto1 (3).jpeg']
+            },
+            {
+                id: 'mem_4',
+                title: 'Pesan dari Delo',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Delo',
+                noteStyle: 'sticky-note-blue',
+                description: 'wadoopp pak WL CGL suda pergi dri bpp 🥹\n\nsemangat ya kak di tempat yg baru, pasti kk bakal ktmu org" yg akan memperbesar kapasitas kk! so semanggad yahh.\n\nthankyou jg ud 4-5 thn ini(?) menjalani hidup (azeg) bertumbuh luar biasa di CG. I\'m so blessed dgn kehadiran kk. thankyou buat usaha kk slama ini ya kak baik pas kk WL ato pas kk jd CGL, thankyou effortnya, bayar harganya, smuasmuanyaaa pkoknya! jgn lupain kita nyakkk.\n\ndah gtu aja. GBU kak Juuu',
+                images: ['Foto1 (4).jpeg']
+            },
+            {
+                id: 'mem_5',
+                title: 'Pesan dari Rendy',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Rendy',
+                noteStyle: 'sticky-note-purple',
+                description: 'makasih banyak ya, Bang, sudah jadi leader yang sabar, baik, dan selalu mau membimbing aku untuk jadi pribadi yang lebih baik, bahkan di saat aku sering nggak punya waktu untuk ikut CG karena kesibukanku, Bang Juan tetap sabar dan nggak pernah berhenti kasih masukan, aku benar-benar bersyukur bisa kenal dan punya leader seperti Bang Juan, sedih pasti karena ke depannya mungkin nggak bisa sesering dulu ketemu, tapi aku berdoa semoga Tuhan selalu menyertai setiap langkah Bang Juan di Jakarta, melancarkan pekerjaan dan setiap rencana Bang Juan, dan semoga di mana pun Bang Juan berada, Bang Juan tetap jadi berkat bagi banyak orang seperti yang sudah Bang Juan lakukan buat kami di sini, Tuhan memberkati selalu ya, Bang Juan. ❤️🙏🏻',
+                images: ['Foto1 (5).jpeg']
+            },
+            {
+                id: 'mem_6',
+                title: 'Pesan dari Marion',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Marion',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Selamat berjuang sobat Juan yang kadang kembaran baju, Goodluck sukses dan Take Care disana ju. God bless sobat',
+                images: ['Foto1 (6).jpeg']
+            }
+        ];
+
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let currentView = 'grid';
+        let activeMemoryId = null;
+        let activeImageIndex = 0;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMemories();
+        });
+
+        function renderMemories() {
+            const gridEl = document.getElementById('galleryGrid');
+            const timelineEl = document.getElementById('timelineView');
+            const emptyEl = document.getElementById('emptyState');
+
+            let filtered = memories.filter(item => {
+                const matchCategory = currentCategory === 'all' || item.category === currentCategory;
+                const matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                    (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                                    (item.author && item.author.toLowerCase().includes(searchQuery.toLowerCase()));
+                return matchCategory && matchSearch;
+            });
+
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (filtered.length === 0) {
+                gridEl.classList.add('hidden');
+                timelineEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+
+            if (currentView === 'grid') {
+                gridEl.classList.remove('hidden');
+                timelineEl.classList.add('hidden');
+                gridEl.innerHTML = filtered.map(m => createPolaroidCard(m)).join('');
+            } else {
+                gridEl.classList.add('hidden');
+                timelineEl.classList.remove('hidden');
+                timelineEl.innerHTML = filtered.map(m => createTimelineCard(m)).join('');
+            }
+        }
+
+        function createPolaroidCard(memory) {
+            const coverImg = memory.images && memory.images.length > 0 ? memory.images[0] : '';
+            
+            return `
+                <div onclick="openLightbox('${memory.id}')" class="polaroid-card rounded-2xl cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="relative w-full h-44 rounded-xl overflow-hidden mb-3 bg-softGray">
+                            <img src="${coverImg}" alt="${memory.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-semibold tracking-wider uppercase text-romanticRed bg-warmRose px-2 py-0.5 rounded-md">${memory.category || 'Momen'}</span>
+                            <span class="text-[10px] text-gray-400">From: ${memory.author}</span>
+                        </div>
+                        <h3 class="font-serif font-bold text-sm text-deepCharcoal group-hover:text-romanticRed transition line-clamp-1">${memory.title}</h3>
+                        ${memory.description ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">"${memory.description}"</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createTimelineCard(memory) {
+            const coverImg = memory.images && memory.images.length > 0 ? memory.images[0] : '';
+            return `
+                <div class="relative pl-6">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-romanticRed border-4 border-white shadow-xs"></div>
+                    <div onclick="openLightbox('${memory.id}')" class="bg-white p-3.5 rounded-2xl border border-blush/20 shadow-xs hover:shadow-md transition cursor-pointer flex flex-col sm:flex-row gap-3">
+                        ${coverImg ? `<img src="${coverImg}" class="w-full sm:w-24 h-24 object-cover rounded-xl shrink-0">` : ''}
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] text-romanticRed font-semibold bg-warmRose px-2 py-0.5 rounded-md">${memory.category}</span>
+                                <span class="text-[10px] text-gray-400">From: ${memory.author}</span>
+                            </div>
+                            <h3 class="font-serif font-bold text-sm text-deepCharcoal mb-1">${memory.title}</h3>
+                            <p class="text-xs text-gray-600 line-clamp-2">"${memory.description || ''}"</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-romanticRed', 'text-white', 'active');
+                btn.classList.add('bg-softGray', 'text-gray-600');
+            });
+
+            event.currentTarget.classList.remove('bg-softGray', 'text-gray-600');
+            event.currentTarget.classList.add('bg-romanticRed', 'text-white', 'active');
+
+            renderMemories();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderMemories();
+        }
+
+        function switchView(view) {
+            currentView = view;
+            const btnGrid = document.getElementById('btnGridView');
+            const btnTimeline = document.getElementById('btnTimelineView');
+
+            if (view === 'grid') {
+                btnGrid.className = 'px-2.5 py-1 rounded-lg text-xs font-medium bg-white shadow-xs text-romanticRed';
+                btnTimeline.className = 'px-2.5 py-1 rounded-lg text-xs font-medium text-gray-500 hover:text-romanticRed';
+            } else {
+                btnTimeline.className = 'px-2.5 py-1 rounded-lg text-xs font-medium bg-white shadow-xs text-romanticRed';
+                btnGrid.className = 'px-2.5 py-1 rounded-lg text-xs font-medium text-gray-500 hover:text-romanticRed';
+            }
+            renderMemories();
+        }
+
+        function openLightbox(id) {
+            const memory = memories.find(m => m.id === id);
+            if (!memory) return;
+
+            activeMemoryId = id;
+            activeImageIndex = 0;
+
+            document.getElementById('lightboxTitle').textContent = memory.title;
+            document.getElementById('lightboxCategory').textContent = memory.category || 'Momen';
+            document.getElementById('lightboxDate').querySelector('span').textContent = formatDate(memory.date);
+            
+            document.getElementById('lightboxNoteAuthor').textContent = `From: ${memory.author}`;
+            document.getElementById('lightboxDescription').textContent = memory.description || 'Tidak ada catatan khusus.';
+            
+            const noteBox = document.getElementById('lightboxNoteBox');
+            noteBox.className = `p-4 rounded-2xl relative shadow-xs ${memory.noteStyle || 'sticky-note-yellow'}`;
+
+            updateLightboxImage();
+
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function updateLightboxImage() {
+            const memory = memories.find(m => m.id === activeMemoryId);
+            if (!memory) return;
+
+            const imgEl = document.getElementById('lightboxImg');
+            const prevBtn = document.getElementById('prevImgBtn');
+            const nextBtn = document.getElementById('nextImgBtn');
+            const dotsEl = document.getElementById('imgDots');
+
+            imgEl.src = memory.images[activeImageIndex] || '';
+
+            if (memory.images.length > 1) {
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+                dotsEl.innerHTML = memory.images.map((_, idx) => `
+                    <div class="w-1.5 h-1.5 rounded-full ${idx === activeImageIndex ? 'bg-white scale-125' : 'bg-white/40'} transition"></div>
+                `).join('');
+            } else {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                dotsEl.innerHTML = '';
+            }
+        }
+
+        function navigateLightboxImage(direction) {
+            const memory = memories.find(m => m.id === activeMemoryId);
+            if (!memory) return;
+
+            activeImageIndex += direction;
+            if (activeImageIndex < 0) activeImageIndex = memory.images.length - 1;
+            if (activeImageIndex >= memory.images.length) activeImageIndex = 0;
+
+            updateLightboxImage();
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+    </script>
+</body>
+</html>
