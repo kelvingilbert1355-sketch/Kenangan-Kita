@@ -50,7 +50,7 @@
         }
         .polaroid-card {
             background: white;
-            padding: 12px 12px 24px 12px;
+            padding: 12px 12px 20px 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -58,6 +58,13 @@
             transform: translateY(-6px) rotate(1deg);
             box-shadow: 0 20px 30px -10px rgba(163, 72, 94, 0.15);
         }
+        /* Sticky Note Styles (Sesuai Referensi) */
+        .sticky-note-yellow { background-color: #FEF3C7; color: #78350F; border: 1px solid #FDE68A; }
+        .sticky-note-pink { background-color: #FCE7F3; color: #831843; border: 1px solid #FBCFE8; }
+        .sticky-note-green { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+        .sticky-note-blue { background-color: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD; }
+        .sticky-note-purple { background-color: #F3E8FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -72,7 +79,7 @@
 </head>
 <body class="min-h-screen pb-20">
 
-    <!-- Header / Navbar -->
+    <!-- Header / Navbar (Tanpa Tombol Tambah Momen) -->
     <header class="sticky top-0 z-40 glass-card border-b border-blush/20 shadow-sm">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -81,14 +88,13 @@
                 </div>
                 <div>
                     <h1 class="font-serif font-bold text-lg text-romanticRed leading-tight">Kenangan Kita</h1>
-                    <p class="text-[10px] sm:text-xs text-gray-500">Album Kenangan Digital</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Album Kenangan & Pesan Kesan</p>
                 </div>
             </div>
             
-            <button onclick="openUploadModal()" class="bg-romanticRed hover:bg-opacity-90 text-white px-3.5 py-2 rounded-full text-xs sm:text-sm font-medium transition flex items-center gap-2 shadow-md active:scale-95">
-                <i class="fa-solid fa-plus"></i>
-                <span>Tambah Momen</span>
-            </button>
+            <div class="text-xs text-romanticRed font-semibold bg-warmRose px-3 py-1.5 rounded-full">
+                ✨ Special Memories
+            </div>
         </div>
     </header>
 
@@ -101,13 +107,13 @@
             Abadikan Setiap Rangkaian Momen
         </h2>
         <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto mb-5">
-            Selamat datang! Pindai QR Code atau buka link ini untuk melihat dan menambahkan momen manis, foto-foto indah, dan catatan berkesan secara mandiri.
+            Selamat datang! Pindai QR Code atau buka link ini untuk melihat foto-foto indah beserta catatan pesan dan kesan berharga di dalamnya.
         </p>
 
         <!-- QR Code Indicator Badge -->
         <div class="inline-flex items-center gap-2 bg-softGray border border-blush/40 px-3.5 py-1.5 rounded-2xl text-xs text-gray-600 shadow-xs mb-2">
             <i class="fa-solid fa-qrcode text-romanticRed text-sm"></i>
-            <span>Scan barcode & upload foto kapan saja dari HP Anda</span>
+            <span>Scan barcode untuk melihat galeri kenangan bersama</span>
         </div>
     </section>
 
@@ -159,78 +165,10 @@
             <div class="w-16 h-16 mx-auto mb-3 bg-warmRose/60 rounded-full flex items-center justify-center text-romanticRed text-2xl">
                 <i class="fa-regular fa-images"></i>
             </div>
-            <h3 class="font-serif font-bold text-base text-deepCharcoal mb-1">Belum Ada Kenangan</h3>
-            <p class="text-xs text-gray-500 max-w-xs mx-auto mb-4">Mulai simpan momen berharga Anda di sini.</p>
-            <button onclick="openUploadModal()" class="inline-flex items-center gap-2 bg-romanticRed text-white px-4 py-2 rounded-full text-xs font-medium shadow-md">
-                <i class="fa-solid fa-plus"></i> Tambah Momen Pertama
-            </button>
+            <h3 class="font-serif font-bold text-base text-deepCharcoal mb-1">Momen Tidak Ditemukan</h3>
+            <p class="text-xs text-gray-500 max-w-xs mx-auto">Coba cari dengan kata kunci lain.</p>
         </div>
     </main>
-
-    <!-- Upload Modal -->
-    <div id="uploadModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl transform scale-95 transition-transform duration-300 overflow-y-auto max-h-[90vh]">
-            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
-                <h3 class="font-serif font-bold text-base sm:text-lg text-romanticRed flex items-center gap-2">
-                    <i class="fa-solid fa-camera"></i> Unggah Kenangan Baru
-                </h3>
-                <button onclick="closeUploadModal()" class="text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="uploadForm" onsubmit="saveMemory(event)" class="space-y-4">
-                <!-- Image File Picker -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">Pilih / Ambil Foto *</label>
-                    <div id="imagePreviewContainer" onclick="document.getElementById('photoInput').click()" class="border-2 border-dashed border-blush hover:border-romanticRed rounded-2xl p-4 text-center cursor-pointer transition bg-softGray/50 relative overflow-hidden min-h-[140px] flex flex-col items-center justify-center">
-                        <input type="file" id="photoInput" accept="image/*" multiple onchange="handleImageSelect(event)" class="hidden">
-                        <div id="uploadPlaceholder" class="space-y-1.5">
-                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-dustyPink"></i>
-                            <p class="text-xs text-gray-600 font-medium">Klik untuk memilih foto dari HP atau kamera</p>
-                            <p class="text-[10px] text-gray-400">Bisa memilih lebih dari 1 foto</p>
-                        </div>
-                        <div id="previewGrid" class="grid grid-cols-3 gap-2 w-full hidden"></div>
-                    </div>
-                </div>
-
-                <!-- Title Input -->
-                <div>
-                    <label for="titleInput" class="block text-xs font-semibold text-gray-700 mb-1">Judul Momen *</label>
-                    <input type="text" id="titleInput" required placeholder="Contoh: Liburan ke Bali / Dinner Ulang Tahun" class="w-full px-3 py-2 bg-softGray/30 border border-blush/40 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
-                </div>
-
-                <!-- Date & Category Input -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label for="dateInput" class="block text-xs font-semibold text-gray-700 mb-1">Tanggal *</label>
-                        <input type="date" id="dateInput" required class="w-full px-3 py-2 bg-softGray/30 border border-blush/40 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
-                    </div>
-                    <div>
-                        <label for="categoryInput" class="block text-xs font-semibold text-gray-700 mb-1">Kategori</label>
-                        <select id="categoryInput" class="w-full px-3 py-2 bg-softGray/30 border border-blush/40 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
-                            <option value="Liburan">🏖️️ Liburan</option>
-                            <option value="Nongkrong">☕ Nongkrong</option>
-                            <option value="Ulang Tahun">🎂 Ulang Tahun</option>
-                            <option value="Momen Spesial" selected>💖 Momen Spesial</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Description / Note Input -->
-                <div>
-                    <label for="descriptionInput" class="block text-xs font-semibold text-gray-700 mb-1">Cerita / Catatan</label>
-                    <textarea id="descriptionInput" rows="3" placeholder="Tuliskan momen lucu, cerita singkat, atau ungkapan perasaan..." class="w-full px-3 py-2 bg-softGray/30 border border-blush/40 rounded-xl text-xs focus:outline-none focus:border-romanticRed resize-none"></textarea>
-                </div>
-
-                <!-- Save Button -->
-                <button type="submit" id="btnSubmit" class="w-full bg-romanticRed hover:bg-opacity-95 text-white font-medium py-2.5 rounded-xl text-xs shadow-md transition active:scale-98 flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-heart"></i>
-                    <span>Simpan Momen Ini</span>
-                </button>
-            </form>
-        </div>
-    </div>
 
     <!-- Lightbox Modal -->
     <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 hidden opacity-0 transition-opacity duration-300">
@@ -252,7 +190,7 @@
                     <div id="imgDots" class="absolute bottom-2 flex gap-1 justify-center w-full"></div>
                 </div>
 
-                <!-- Info Section -->
+                <!-- Info Section with Sticky Note Style -->
                 <div class="p-5 space-y-3">
                     <div class="flex justify-between items-start gap-2">
                         <div>
@@ -264,23 +202,227 @@
                         </span>
                     </div>
 
-                    <p id="lightboxDescription" class="text-xs sm:text-sm text-gray-600 leading-relaxed bg-softGray/60 p-3 rounded-xl border border-blush/20 whitespace-pre-line"></p>
+                    <!-- Note / Pesan Kesan Box (Sesuai Referensi Sticky Notes) -->
+                    <div id="lightboxNoteBox" class="p-4 rounded-2xl relative shadow-xs">
+                        <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full shadow-sm border border-white flex items-center justify-center text-[8px] text-white">📌</div>
+                        <span id="lightboxNoteAuthor" class="text-[11px] font-bold block mb-1"></span>
+                        <p id="lightboxDescription" class="text-xs sm:text-sm italic leading-relaxed whitespace-pre-line"></p>
+                    </div>
 
                     <div class="flex justify-between items-center pt-2 border-t border-gray-100 text-xs">
-                        <span class="text-gray-400 text-[10px]">Tersimpan di perangkat lokal</span>
-                        <button id="btnDeleteMemory" onclick="deleteCurrentMemory()" class="text-red-500 hover:text-red-700 flex items-center gap-1 font-medium text-xs">
-                            <i class="fa-regular fa-trash-can"></i> Hapus Momen
-                        </button>
+                        <span class="text-gray-400 text-[10px]">Kenangan Kita - Special Memories</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Application Logic -->
+    <!-- Application Logic with 20 Manual Photos & Notes -->
     <script>
-        let memories = [];
-        let selectedFiles = [];
+        // Data 20 Foto Manual lengkap dengan Pesan & Kesan (Note)
+        const memories = [
+            {
+                id: 'mem_1',
+                title: 'Matahari Terbenam di Pantai',
+                date: '2026-02-14',
+                category: 'Liburan',
+                author: 'Reva',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Kak selamat memasuki bab baru, walaupun sedih brutal, tapi aku percaya Tuhan lagi bawa kakak ke tempat yang lebih luas untuk melayani...',
+                images: ['Foto1 (1).jpeg']
+            },
+            {
+                id: 'mem_2',
+                title: 'Ngopi dan Diskusi Hangat',
+                date: '2026-02-15',
+                category: 'Nongkrong',
+                author: 'Keren',
+                noteStyle: 'sticky-note-green',
+                description: 'A million stars can fill the sky. A thousand fish can inhabit the sea. But you will always be a part of this family...',
+                images: ['Foto1 (2).jpeg']
+            },
+            {
+                id: 'mem_3',
+                title: 'Kebersamaan yang Berharga',
+                date: '2026-02-16',
+                category: 'Momen Spesial',
+                author: 'Freya',
+                noteStyle: 'sticky-note-purple',
+                description: 'Halowww kak, aku mau say thank you ya kak karna selalu ingat aku dan ngajak aku untuk cg dan aog hahaha aku ingat banget dulu kakak selalu invite aku buat join...',
+                images: ['Foto1 (3).jpeg']
+            },
+            {
+                id: 'mem_4',
+                title: 'Momen Seru Bersama',
+                date: '2026-02-17',
+                category: 'Momen Spesial',
+                author: 'Chris',
+                noteStyle: 'sticky-note-blue',
+                description: 'Terimakasih ka Anya yang sudah selalu support ak dan selalu juga memuridkan diriku ini yang sangat kepala batu ini dan usil tapi ka Anya tetap mau fight untuk ak bisa maju...',
+                images: ['Foto1 (4).jpeg']
+            },
+            {
+                id: 'mem_5',
+                title: 'Perjalanan Penuh Cerita',
+                date: '2026-02-18',
+                category: 'Liburan',
+                author: 'Kevin',
+                noteStyle: 'sticky-note-pink',
+                description: 'Halo Kak Anya! Terima kasih sudah 2 tahun jadi CGL-ku. Kakak sudah mengubah hidup dan pola pikirku, serta memberi keberanian untuk mencoba hal baru.',
+                images: ['Foto1 (5).jpeg']
+            },
+            {
+                id: 'mem_6',
+                title: 'Kumpul Santai Sore Hari',
+                date: '2026-02-19',
+                category: 'Nongkrong',
+                author: 'Ricardo',
+                noteStyle: 'sticky-note-purple',
+                description: 'Hai Kak Anya, makasih ya buat semua sharingnya di CG. Aku merasa terberkati dengan apa yang Kak Anya ceritain, apalagi soal be aware of redflag, tema Februari...',
+                images: ['Foto1 (6).jpeg']
+            },
+            {
+                id: 'mem_7',
+                title: 'Perayaan Hari Spesial',
+                date: '2026-02-20',
+                category: 'Ulang Tahun',
+                author: 'Syifa',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Filipi 4:13 — Segala perkara dapat kutanggung di dalam Dia yang memberi kekuatan kepadaku.',
+                images: ['Foto1 (7).jpeg']
+            },
+            {
+                id: 'mem_8',
+                title: 'Kenangan Manis Bersama',
+                date: '2026-02-21',
+                category: 'Momen Spesial',
+                author: 'Vincent',
+                noteStyle: 'sticky-note-green',
+                description: 'Filipi 4:13 — Semangat terus, Kak Anya; Tuhan menyertai rencananya untukmu.',
+                images: ['Foto1 (8).jpeg']
+            },
+            {
+                id: 'mem_9',
+                title: 'Suasana Keakraban',
+                date: '2026-02-22',
+                category: 'Momen Spesial',
+                author: 'Michael',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Happy graduation Kak Anya! Good luck buat next-step-nya ya Kak, sukses terus! God bless you.',
+                images: ['Foto1 (9).jpeg']
+            },
+            {
+                id: 'mem_10',
+                title: 'Keseruan Aktivitas Kelompok',
+                date: '2026-02-23',
+                category: 'Momen Spesial',
+                author: 'Ria',
+                noteStyle: 'sticky-note-green',
+                description: 'Hallo kak Anya, Ria bersyukur dan very happy bisa ketemu Kak Anya. Terima kasih untuk semua bimbingan di CG and sharing Kotbahnya. Tuhan terus pakai Kak Anya untuk...',
+                images: ['Foto1 (10).jpeg']
+            },
+            {
+                id: 'mem_11',
+                title: 'Momen Penuh Inspirasi',
+                date: '2026-02-24',
+                category: 'Momen Spesial',
+                author: 'Meysi',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Selamat memasuki part baru Alfa, semoga hal baru yang datang membuat Alfa bertumbuh dan tambah kuat di dalam iman.',
+                images: ['Foto1 (11).jpeg']
+            },
+            {
+                id: 'mem_12',
+                title: 'Kebersamaan Penuh Tawa',
+                date: '2026-02-25',
+                category: 'Nongkrong',
+                author: 'Dave',
+                noteStyle: 'sticky-note-green',
+                description: 'Terima kasih banyak, Kak Anya, atas semua bimbingan, doa, dan waktu yang Kakak berikan di CG.',
+                images: ['Foto1 (12).jpeg']
+            },
+            {
+                id: 'mem_13',
+                title: 'Petualangan Seru',
+                date: '2026-02-26',
+                category: 'Liburan',
+                author: 'Teman Setia',
+                noteStyle: 'sticky-note-pink',
+                description: 'Kenangan indah yang tidak akan pernah terlupakan di setiap perjalanan.',
+                images: ['Foto1 (13).jpeg']
+            },
+            {
+                id: 'mem_14',
+                title: 'Senyum Kebahagiaan',
+                date: '2026-02-27',
+                category: 'Momen Spesial',
+                author: 'Sahabat',
+                noteStyle: 'sticky-note-blue',
+                description: 'Terima kasih atas semua canda tawa dan momen berharga yang kita lewati bersama.',
+                images: ['Foto1 (14).jpeg']
+            },
+            {
+                id: 'mem_15',
+                title: 'Waktu Indah Bersama',
+                date: '2026-02-28',
+                category: 'Momen Spesial',
+                author: 'Keluarga CG',
+                noteStyle: 'sticky-note-purple',
+                description: 'Semoga persahabatan dan kebersamaan ini terus terjalin erat sampai kapanpun.',
+                images: ['Foto1 (15).jpeg']
+            },
+            {
+                id: 'mem_16',
+                title: 'Momen Santai Sore',
+                date: '2026-03-01',
+                category: 'Nongkrong',
+                author: 'Rekan',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Menikmati waktu santai setelah penat beraktivitas seharian penuh.',
+                images: ['Foto1 (16).jpeg']
+            },
+            {
+                id: 'mem_17',
+                title: 'Perjalanan Berkesan',
+                date: '2026-03-02',
+                category: 'Liburan',
+                author: 'Sobat',
+                noteStyle: 'sticky-note-green',
+                description: 'Destinasi indah dengan cerita dan kesan mendalam di setiap sudutnya.',
+                images: ['Foto1 (17).jpeg']
+            },
+            {
+                id: 'mem_18',
+                title: 'Hari Penuh Makna',
+                date: '2026-03-03',
+                category: 'Momen Spesial',
+                author: 'Sahabat Baik',
+                noteStyle: 'sticky-note-pink',
+                description: 'Setiap detik bersama adalah anugerah yang patut disyukuri.',
+                images: ['Foto1 (18).jpeg']
+            },
+            {
+                id: 'mem_19',
+                title: 'Kumpul Ceria',
+                date: '2026-03-04',
+                category: 'Nongkrong',
+                author: 'Tim Seru',
+                noteStyle: 'sticky-note-blue',
+                description: 'Tawa dan cerita selalu menghiasi setiap kali kita berkumpul.',
+                images: ['Foto1 (19).jpeg']
+            },
+            {
+                id: 'mem_20',
+                title: 'Kenangan Abadi',
+                date: '2026-03-05',
+                category: 'Momen Spesial',
+                author: 'Semuanya',
+                noteStyle: 'sticky-note-purple',
+                description: 'Terima kasih untuk semua cerita indah yang sudah kita ukir bersama dalam album kenangan ini.',
+                images: ['Foto1 (20).jpeg']
+            }
+        ];
+
         let currentCategory = 'all';
         let searchQuery = '';
         let currentView = 'grid';
@@ -288,54 +430,8 @@
         let activeImageIndex = 0;
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadMemories();
-            document.getElementById('dateInput').valueAsDate = new Date();
-        });
-
-        // IndexedDB & LocalStorage Fallback Handler
-        function loadMemories() {
-            const stored = localStorage.getItem('kenangan_kita_memories');
-            if (stored) {
-                try {
-                    memories = JSON.parse(stored);
-                } catch (e) {
-                    memories = getInitialSampleData();
-                }
-            } else {
-                memories = getInitialSampleData();
-                saveMemoriesToStorage();
-            }
             renderMemories();
-        }
-
-        function saveMemoriesToStorage() {
-            try {
-                localStorage.setItem('kenangan_kita_memories', JSON.stringify(memories));
-            } catch (e) {
-                alert("Penyimpanan penuh! Coba unggah ukuran foto yang lebih kecil.");
-            }
-        }
-
-        function getInitialSampleData() {
-            return [
-                {
-                    id: 'mem_1',
-                    title: 'Matahari Terbenam di Pantai',
-                    date: '2025-02-14',
-                    category: 'Liburan',
-                    description: 'Momen indah menikmati senja bersama di tepi pantai dengan angin sepoi-sepoi.',
-                    images: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80']
-                },
-                {
-                    id: 'mem_2',
-                    title: 'Ngopi dan Diskusi Hangat',
-                    date: '2025-05-10',
-                    category: 'Nongkrong',
-                    description: 'Menghabiskan akhir pekan di kedai kopi favorit sambil berbincang banyak hal.',
-                    images: ['https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80']
-                }
-            ];
-        }
+        });
 
         function renderMemories() {
             const gridEl = document.getElementById('galleryGrid');
@@ -345,7 +441,8 @@
             let filtered = memories.filter(item => {
                 const matchCategory = currentCategory === 'all' || item.category === currentCategory;
                 const matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                    (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase()));
+                                    (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                                    (item.author && item.author.toLowerCase().includes(searchQuery.toLowerCase()));
                 return matchCategory && matchSearch;
             });
 
@@ -372,27 +469,21 @@
         }
 
         function createPolaroidCard(memory) {
-            const coverImg = memory.images && memory.images.length > 0 
-                ? memory.images[0] 
-                : 'https://via.placeholder.com/400x300?text=Tidak+Ada+Foto';
+            const coverImg = memory.images && memory.images.length > 0 ? memory.images[0] : '';
             
-            const badgeCount = memory.images && memory.images.length > 1 
-                ? `<span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full"><i class="fa-regular fa-clone"></i> ${memory.images.length}</span>`
-                : '';
-
             return `
                 <div onclick="openLightbox('${memory.id}')" class="polaroid-card rounded-2xl cursor-pointer group flex flex-col justify-between">
                     <div>
                         <div class="relative w-full h-44 rounded-xl overflow-hidden mb-3 bg-softGray">
                             <img src="${coverImg}" alt="${memory.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            ${badgeCount}
                         </div>
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-[10px] font-semibold tracking-wider uppercase text-romanticRed bg-warmRose px-2 py-0.5 rounded-md">${memory.category || 'Momen'}</span>
                             <span class="text-[10px] text-gray-400">${formatDate(memory.date)}</span>
                         </div>
                         <h3 class="font-serif font-bold text-sm text-deepCharcoal group-hover:text-romanticRed transition line-clamp-1">${memory.title}</h3>
-                        ${memory.description ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">${memory.description}</p>` : ''}
+                        <p class="text-xs text-romanticRed font-semibold mt-1">From: ${memory.author}</p>
+                        ${memory.description ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">"${memory.description}"</p>` : ''}
                     </div>
                 </div>
             `;
@@ -411,7 +502,8 @@
                                 <span class="text-[10px] text-gray-400"><i class="fa-regular fa-calendar"></i> ${formatDate(memory.date)}</span>
                             </div>
                             <h3 class="font-serif font-bold text-sm text-deepCharcoal mb-1">${memory.title}</h3>
-                            <p class="text-xs text-gray-600 line-clamp-2">${memory.description || ''}</p>
+                            <p class="text-xs font-semibold text-romanticRed mb-1">From: ${memory.author}</p>
+                            <p class="text-xs text-gray-600 line-clamp-2">"${memory.description || ''}"</p>
                         </div>
                     </div>
                 </div>
@@ -457,83 +549,6 @@
             renderMemories();
         }
 
-        function openUploadModal() {
-            const modal = document.getElementById('uploadModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
-            selectedFiles = [];
-            resetUploadForm();
-        }
-
-        function closeUploadModal() {
-            const modal = document.getElementById('uploadModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
-
-        function resetUploadForm() {
-            document.getElementById('uploadForm').reset();
-            document.getElementById('dateInput').valueAsDate = new Date();
-            document.getElementById('uploadPlaceholder').classList.remove('hidden');
-            const previewGrid = document.getElementById('previewGrid');
-            previewGrid.classList.add('hidden');
-            previewGrid.innerHTML = '';
-            selectedFiles = [];
-        }
-
-        function handleImageSelect(event) {
-            const files = Array.from(event.target.files);
-            if (!files.length) return;
-
-            selectedFiles = [];
-            const previewGrid = document.getElementById('previewGrid');
-            const placeholder = document.getElementById('uploadPlaceholder');
-
-            placeholder.classList.add('hidden');
-            previewGrid.classList.remove('hidden');
-            previewGrid.innerHTML = '';
-
-            files.forEach((file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    selectedFiles.push(e.target.result);
-                    const imgContainer = document.createElement('div');
-                    imgContainer.className = "relative h-20 rounded-xl overflow-hidden bg-gray-100 border border-blush/30";
-                    imgContainer.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
-                    previewGrid.appendChild(imgContainer);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function saveMemory(e) {
-            e.preventDefault();
-
-            if (selectedFiles.length === 0) {
-                alert('Silakan pilih atau ambil minimal 1 foto.');
-                return;
-            }
-
-            const title = document.getElementById('titleInput').value.trim();
-            const date = document.getElementById('dateInput').value;
-            const category = document.getElementById('categoryInput').value;
-            const description = document.getElementById('descriptionInput').value.trim();
-
-            const newMemory = {
-                id: 'mem_' + Date.now(),
-                title,
-                date,
-                category,
-                description,
-                images: selectedFiles
-            };
-
-            memories.unshift(newMemory);
-            saveMemoriesToStorage();
-            renderMemories();
-            closeUploadModal();
-        }
-
         function openLightbox(id) {
             const memory = memories.find(m => m.id === id);
             if (!memory) return;
@@ -544,7 +559,13 @@
             document.getElementById('lightboxTitle').textContent = memory.title;
             document.getElementById('lightboxCategory').textContent = memory.category || 'Momen';
             document.getElementById('lightboxDate').querySelector('span').textContent = formatDate(memory.date);
+            
+            // Set Sticky Note Author & Content & Style
+            document.getElementById('lightboxNoteAuthor').textContent = `From: ${memory.author}`;
             document.getElementById('lightboxDescription').textContent = memory.description || 'Tidak ada catatan khusus.';
+            
+            const noteBox = document.getElementById('lightboxNoteBox');
+            noteBox.className = `p-4 rounded-2xl relative shadow-xs ${memory.noteStyle || 'sticky-note-yellow'}`;
 
             updateLightboxImage();
 
@@ -568,7 +589,7 @@
             const nextBtn = document.getElementById('nextImgBtn');
             const dotsEl = document.getElementById('imgDots');
 
-            imgEl.src = memory.images[activeImageIndex] || 'https://via.placeholder.com/600x400?text=Tidak+Ada+Foto';
+            imgEl.src = memory.images[activeImageIndex] || '';
 
             if (memory.images.length > 1) {
                 prevBtn.classList.remove('hidden');
@@ -592,17 +613,6 @@
             if (activeImageIndex >= memory.images.length) activeImageIndex = 0;
 
             updateLightboxImage();
-        }
-
-        function deleteCurrentMemory() {
-            if (!activeMemoryId) return;
-
-            if (confirm('Apakah Anda yakin ingin menghapus kenangan ini?')) {
-                memories = memories.filter(m => m.id !== activeMemoryId);
-                saveMemoriesToStorage();
-                renderMemories();
-                closeLightbox();
-            }
         }
     </script>
 </body>
