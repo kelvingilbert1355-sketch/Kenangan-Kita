@@ -58,7 +58,7 @@
             transform: translateY(-6px) rotate(1deg);
             box-shadow: 0 20px 30px -10px rgba(163, 72, 94, 0.15);
         }
-        /* Sticky Note Styles (Sesuai Referensi) */
+        /* Sticky Note Styles */
         .sticky-note-yellow { background-color: #FEF3C7; color: #78350F; border: 1px solid #FDE68A; }
         .sticky-note-pink { background-color: #FCE7F3; color: #831843; border: 1px solid #FBCFE8; }
         .sticky-note-green { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
@@ -79,7 +79,7 @@
 </head>
 <body class="min-h-screen pb-20">
 
-    <!-- Header / Navbar (Tanpa Tombol Tambah Momen) -->
+    <!-- Header / Navbar -->
     <header class="sticky top-0 z-40 glass-card border-b border-blush/20 shadow-sm">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -93,7 +93,7 @@
             </div>
             
             <div class="text-xs text-romanticRed font-semibold bg-warmRose px-3 py-1.5 rounded-full">
-                ✨ Special Memories
+                ✨ Special Memories for Kak Juan
             </div>
         </div>
     </header>
@@ -107,10 +107,9 @@
             Abadikan Setiap Rangkaian Momen
         </h2>
         <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto mb-5">
-            Selamat datang! Pindai QR Code atau buka link ini untuk melihat foto-foto indah beserta catatan pesan dan kesan berharga di dalamnya.
+            Koleksi foto indah beserta catatan pesan dan kesan berharga untuk Kak Juan.
         </p>
 
-        <!-- QR Code Indicator Badge -->
         <div class="inline-flex items-center gap-2 bg-softGray border border-blush/40 px-3.5 py-1.5 rounded-2xl text-xs text-gray-600 shadow-xs mb-2">
             <i class="fa-solid fa-qrcode text-romanticRed text-sm"></i>
             <span>Scan barcode untuk melihat galeri kenangan bersama</span>
@@ -121,19 +120,14 @@
     <section class="max-w-4xl mx-auto px-4 py-4">
         <div class="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white/70 p-3 rounded-2xl border border-blush/20 shadow-xs">
             
-            <!-- Category Filters -->
             <div class="flex gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 no-scrollbar" id="categoryFilter">
                 <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded-xl text-xs font-medium bg-romanticRed text-white whitespace-nowrap transition">Semua</button>
-                <button onclick="filterCategory('Liburan')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">🏖️ Liburan</button>
-                <button onclick="filterCategory('Nongkrong')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">☕ Nongkrong</button>
-                <button onclick="filterCategory('Ulang Tahun')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">🎂 Ultah</button>
-                <button onclick="filterCategory('Momen Spesial')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">💖 Spesial</button>
+                <button onclick="filterCategory('Pesan')" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-softGray text-gray-600 hover:bg-warmRose whitespace-nowrap transition">💌 Pesan & Kesan</button>
             </div>
 
-            <!-- Search & View Toggle -->
             <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
                 <div class="relative flex-1 sm:w-44">
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari kenangan..." class="w-full pl-8 pr-3 py-1.5 bg-white border border-blush/30 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari pesan / pengirim..." class="w-full pl-8 pr-3 py-1.5 bg-white border border-blush/30 rounded-xl text-xs focus:outline-none focus:border-romanticRed">
                     <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-xs text-gray-400"></i>
                 </div>
                 <div class="flex bg-softGray p-1 rounded-xl border border-blush/20">
@@ -150,23 +144,15 @@
 
     <!-- Main Content Gallery Container -->
     <main class="max-w-4xl mx-auto px-4 mt-2">
-        <!-- Grid View -->
-        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <!-- Populated via JavaScript -->
-        </div>
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+        <div id="timelineView" class="hidden relative border-l-2 border-blush/50 ml-3 sm:ml-28 my-6 space-y-6"></div>
 
-        <!-- Timeline View -->
-        <div id="timelineView" class="hidden relative border-l-2 border-blush/50 ml-3 sm:ml-28 my-6 space-y-6">
-            <!-- Populated via JavaScript -->
-        </div>
-
-        <!-- Empty State -->
         <div id="emptyState" class="hidden text-center py-16 px-4">
             <div class="w-16 h-16 mx-auto mb-3 bg-warmRose/60 rounded-full flex items-center justify-center text-romanticRed text-2xl">
                 <i class="fa-regular fa-images"></i>
             </div>
-            <h3 class="font-serif font-bold text-base text-deepCharcoal mb-1">Momen Tidak Ditemukan</h3>
-            <p class="text-xs text-gray-500 max-w-xs mx-auto">Coba cari dengan kata kunci lain.</p>
+            <h3 class="font-serif font-bold text-base text-deepCharcoal mb-1">Pesan Tidak Ditemukan</h3>
+            <p class="text-xs text-gray-500 max-w-xs mx-auto">Coba cari dengan nama pengirim atau kata kunci lain.</p>
         </div>
     </main>
 
@@ -178,7 +164,6 @@
             </button>
 
             <div class="overflow-y-auto">
-                <!-- Photo Slider Section -->
                 <div class="relative bg-black flex items-center justify-center min-h-[240px] max-h-[420px]">
                     <img id="lightboxImg" src="" alt="Detail Momen" class="max-h-[420px] w-full object-contain">
                     <button id="prevImgBtn" onclick="navigateLightboxImage(-1)" class="absolute left-3 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hidden hover:bg-black/80">
@@ -190,7 +175,6 @@
                     <div id="imgDots" class="absolute bottom-2 flex gap-1 justify-center w-full"></div>
                 </div>
 
-                <!-- Info Section with Sticky Note Style -->
                 <div class="p-5 space-y-3">
                     <div class="flex justify-between items-start gap-2">
                         <div>
@@ -202,224 +186,78 @@
                         </span>
                     </div>
 
-                    <!-- Note / Pesan Kesan Box (Sesuai Referensi Sticky Notes) -->
                     <div id="lightboxNoteBox" class="p-4 rounded-2xl relative shadow-xs">
                         <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full shadow-sm border border-white flex items-center justify-center text-[8px] text-white">📌</div>
                         <span id="lightboxNoteAuthor" class="text-[11px] font-bold block mb-1"></span>
                         <p id="lightboxDescription" class="text-xs sm:text-sm italic leading-relaxed whitespace-pre-line"></p>
-                    </div>
-
-                    <div class="flex justify-between items-center pt-2 border-t border-gray-100 text-xs">
-                        <span class="text-gray-400 text-[10px]">Kenangan Kita - Special Memories</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Application Logic with 20 Manual Photos & Notes -->
+    <!-- Application Logic -->
     <script>
-        // Data 20 Foto Manual lengkap dengan Pesan & Kesan (Note)
         const memories = [
             {
                 id: 'mem_1',
-                title: 'Matahari Terbenam di Pantai',
-                date: '2026-02-14',
-                category: 'Liburan',
-                author: 'Reva',
-                noteStyle: 'sticky-note-yellow',
-                description: 'Kak selamat memasuki bab baru, walaupun sedih brutal, tapi aku percaya Tuhan lagi bawa kakak ke tempat yang lebih luas untuk melayani...',
+                title: 'Pesan dari Cantika',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Cantika',
+                noteStyle: 'sticky-note-pink',
+                description: '“terima kasih terima kasih dan terima kasih kak juan, God bless di manapun, intinya inpo loker.” ~ from cancan:,)',
                 images: ['Foto1 (1).jpeg']
             },
             {
                 id: 'mem_2',
-                title: 'Ngopi dan Diskusi Hangat',
-                date: '2026-02-15',
-                category: 'Nongkrong',
-                author: 'Keren',
-                noteStyle: 'sticky-note-green',
-                description: 'A million stars can fill the sky. A thousand fish can inhabit the sea. But you will always be a part of this family...',
+                title: 'Pesan dari Jimi',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Jimi',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Yo Kak, bertahun tahun kita udah jalan bareng di CG sampe kk jadi CGL .\nKalau dipikir-pikir udah banyak banget momen yang kita lewatin. Dari yang ketawa-tawa, bercanda ga jelas, sharing, doa bareng, sampai hal-hal kecil yang mungkin waktu itu terasa biasa aja, tapi sekarang malah jadi hal yang bakal dikangenin.\n\nJujur sedih banget pas tau kakak bakal pergi kerja di luar kota. Rasanya kayak nanti ada yang kurang. Apalagi dari 2022 sampai sekarang udah terbiasa ada Kak Juan di antara kita, terus sekarang harus mulai terbiasa sama keadaan yang beda.\n\nMakasih ya kak, buat semua kebersamaannya, Makasih udah jadi bagian dari perjalanan CG ini, dan Tetap setia melayani bareng bareng walaupun kadang kk pasti dalam kondisi yang random kadang happy kadang sedih karna hal lain,thx bro udah jadi teman, kakak, dan orang yang bertumbuh bareng sama kita. Mungkin kita ga selalu ngomong hal-hal kayak gini secara langsung, tapi kehadiran kakak selama ini berarti banget buat aku sih kak.\n\nSemoga di tempat yang baru nanti Tuhan selalu jagain Kak Juan. Semoga pekerjaannya dilancarkan, dipertemukan sama orang-orang yang baik, dan apa pun yang kakak kerjakan di sana Tuhan berkati. Kalau nanti ada masa-masa capek atau ngerasa sendirian, jangan lupa kalau di sini masih ada kita yang selalu dukung dan doain u bro.\n\nSEMANGAT di tempat yang baru dan pastinya suasana baru tetap bertumbuh didalam Tuhan dan tidak lupa dengan mengerjakan misi kita di ladang yang Baru yang Tuhan sediakan.\nNo matter how far life takes you, you’ll always have a home and a family here with us. This isn’t goodbye,It’s just ‘see you again someday.\n\nGodBlessYu🤍',
                 images: ['Foto1 (2).jpeg']
             },
             {
                 id: 'mem_3',
-                title: 'Kebersamaan yang Berharga',
-                date: '2026-02-16',
-                category: 'Momen Spesial',
-                author: 'Freya',
-                noteStyle: 'sticky-note-purple',
-                description: 'Halowww kak, aku mau say thank you ya kak karna selalu ingat aku dan ngajak aku untuk cg dan aog hahaha aku ingat banget dulu kakak selalu invite aku buat join...',
+                title: 'Pesan dari Aris',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Aris',
+                noteStyle: 'sticky-note-green',
+                description: 'Semangat buat perjalanan barunya ya, Kak Juan! 🔥\nWalaupun belum terlalu sering ngobrol, semoga ke depannya makin banyak hal baik yang Kak Juan alami di tempat yang baru. Sukses buat kerjaannya, dan semoga pelayanannya juga makin menyala di mana pun Tuhan tempatkan! 🙌🏻😎',
                 images: ['Foto1 (3).jpeg']
             },
             {
                 id: 'mem_4',
-                title: 'Momen Seru Bersama',
-                date: '2026-02-17',
-                category: 'Momen Spesial',
-                author: 'Chris',
+                title: 'Pesan dari Delo',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Delo',
                 noteStyle: 'sticky-note-blue',
-                description: 'Terimakasih ka Anya yang sudah selalu support ak dan selalu juga memuridkan diriku ini yang sangat kepala batu ini dan usil tapi ka Anya tetap mau fight untuk ak bisa maju...',
+                description: 'wadoopp pak WL CGL suda pergi dri bpp 🥹\n\nsemangat ya kak di tempat yg baru, pasti kk bakal ktmu org" yg akan memperbesar kapasitas kk! so semanggad yahh.\n\nthankyou jg ud 4-5 thn ini(?) menjalani hidup (azeg) bertumbuh luar biasa di CG. I\'m so blessed dgn kehadiran kk. thankyou buat usaha kk slama ini ya kak baik pas kk WL ato pas kk jd CGL, thankyou effortnya, bayar harganya, smuasmuanyaaa pkoknya! jgn lupain kita nyakkk.\n\ndah gtu aja. GBU kak Juuu',
                 images: ['Foto1 (4).jpeg']
             },
             {
                 id: 'mem_5',
-                title: 'Perjalanan Penuh Cerita',
-                date: '2026-02-18',
-                category: 'Liburan',
-                author: 'Kevin',
-                noteStyle: 'sticky-note-pink',
-                description: 'Halo Kak Anya! Terima kasih sudah 2 tahun jadi CGL-ku. Kakak sudah mengubah hidup dan pola pikirku, serta memberi keberanian untuk mencoba hal baru.',
+                title: 'Pesan dari Rendy',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Rendy',
+                noteStyle: 'sticky-note-purple',
+                description: 'makasih banyak ya, Bang, sudah jadi leader yang sabar, baik, dan selalu mau membimbing aku untuk jadi pribadi yang lebih baik, bahkan di saat aku sering nggak punya waktu untuk ikut CG karena kesibukanku, Bang Juan tetap sabar dan nggak pernah berhenti kasih masukan, aku benar-benar bersyukur bisa kenal dan punya leader seperti Bang Juan, sedih pasti karena ke depannya mungkin nggak bisa sesering dulu ketemu, tapi aku berdoa semoga Tuhan selalu menyertai setiap langkah Bang Juan di Jakarta, melancarkan pekerjaan dan setiap rencana Bang Juan, dan semoga di mana pun Bang Juan berada, Bang Juan tetap jadi berkat bagi banyak orang seperti yang sudah Bang Juan lakukan buat kami di sini, Tuhan memberkati selalu ya, Bang Juan. ❤️🙏🏻',
                 images: ['Foto1 (5).jpeg']
             },
             {
                 id: 'mem_6',
-                title: 'Kumpul Santai Sore Hari',
-                date: '2026-02-19',
-                category: 'Nongkrong',
-                author: 'Ricardo',
-                noteStyle: 'sticky-note-purple',
-                description: 'Hai Kak Anya, makasih ya buat semua sharingnya di CG. Aku merasa terberkati dengan apa yang Kak Anya ceritain, apalagi soal be aware of redflag, tema Februari...',
+                title: 'Pesan dari Marion',
+                date: '2026-06-01',
+                category: 'Pesan',
+                author: 'Marion',
+                noteStyle: 'sticky-note-yellow',
+                description: 'Selamat berjuang sobat Juan yang kadang kembaran baju, Goodluck sukses dan Take Care disana ju. God bless sobat',
                 images: ['Foto1 (6).jpeg']
-            },
-            {
-                id: 'mem_7',
-                title: 'Perayaan Hari Spesial',
-                date: '2026-02-20',
-                category: 'Ulang Tahun',
-                author: 'Syifa',
-                noteStyle: 'sticky-note-yellow',
-                description: 'Filipi 4:13 — Segala perkara dapat kutanggung di dalam Dia yang memberi kekuatan kepadaku.',
-                images: ['Foto1 (7).jpeg']
-            },
-            {
-                id: 'mem_8',
-                title: 'Kenangan Manis Bersama',
-                date: '2026-02-21',
-                category: 'Momen Spesial',
-                author: 'Vincent',
-                noteStyle: 'sticky-note-green',
-                description: 'Filipi 4:13 — Semangat terus, Kak Anya; Tuhan menyertai rencananya untukmu.',
-                images: ['Foto1 (8).jpeg']
-            },
-            {
-                id: 'mem_9',
-                title: 'Suasana Keakraban',
-                date: '2026-02-22',
-                category: 'Momen Spesial',
-                author: 'Michael',
-                noteStyle: 'sticky-note-yellow',
-                description: 'Happy graduation Kak Anya! Good luck buat next-step-nya ya Kak, sukses terus! God bless you.',
-                images: ['Foto1 (9).jpeg']
-            },
-            {
-                id: 'mem_10',
-                title: 'Keseruan Aktivitas Kelompok',
-                date: '2026-02-23',
-                category: 'Momen Spesial',
-                author: 'Ria',
-                noteStyle: 'sticky-note-green',
-                description: 'Hallo kak Anya, Ria bersyukur dan very happy bisa ketemu Kak Anya. Terima kasih untuk semua bimbingan di CG and sharing Kotbahnya. Tuhan terus pakai Kak Anya untuk...',
-                images: ['Foto1 (10).jpeg']
-            },
-            {
-                id: 'mem_11',
-                title: 'Momen Penuh Inspirasi',
-                date: '2026-02-24',
-                category: 'Momen Spesial',
-                author: 'Meysi',
-                noteStyle: 'sticky-note-yellow',
-                description: 'Selamat memasuki part baru Alfa, semoga hal baru yang datang membuat Alfa bertumbuh dan tambah kuat di dalam iman.',
-                images: ['Foto1 (11).jpeg']
-            },
-            {
-                id: 'mem_12',
-                title: 'Kebersamaan Penuh Tawa',
-                date: '2026-02-25',
-                category: 'Nongkrong',
-                author: 'Dave',
-                noteStyle: 'sticky-note-green',
-                description: 'Terima kasih banyak, Kak Anya, atas semua bimbingan, doa, dan waktu yang Kakak berikan di CG.',
-                images: ['Foto1 (12).jpeg']
-            },
-            {
-                id: 'mem_13',
-                title: 'Petualangan Seru',
-                date: '2026-02-26',
-                category: 'Liburan',
-                author: 'Teman Setia',
-                noteStyle: 'sticky-note-pink',
-                description: 'Kenangan indah yang tidak akan pernah terlupakan di setiap perjalanan.',
-                images: ['Foto1 (13).jpeg']
-            },
-            {
-                id: 'mem_14',
-                title: 'Senyum Kebahagiaan',
-                date: '2026-02-27',
-                category: 'Momen Spesial',
-                author: 'Sahabat',
-                noteStyle: 'sticky-note-blue',
-                description: 'Terima kasih atas semua canda tawa dan momen berharga yang kita lewati bersama.',
-                images: ['Foto1 (14).jpeg']
-            },
-            {
-                id: 'mem_15',
-                title: 'Waktu Indah Bersama',
-                date: '2026-02-28',
-                category: 'Momen Spesial',
-                author: 'Keluarga CG',
-                noteStyle: 'sticky-note-purple',
-                description: 'Semoga persahabatan dan kebersamaan ini terus terjalin erat sampai kapanpun.',
-                images: ['Foto1 (15).jpeg']
-            },
-            {
-                id: 'mem_16',
-                title: 'Momen Santai Sore',
-                date: '2026-03-01',
-                category: 'Nongkrong',
-                author: 'Rekan',
-                noteStyle: 'sticky-note-yellow',
-                description: 'Menikmati waktu santai setelah penat beraktivitas seharian penuh.',
-                images: ['Foto1 (16).jpeg']
-            },
-            {
-                id: 'mem_17',
-                title: 'Perjalanan Berkesan',
-                date: '2026-03-02',
-                category: 'Liburan',
-                author: 'Sobat',
-                noteStyle: 'sticky-note-green',
-                description: 'Destinasi indah dengan cerita dan kesan mendalam di setiap sudutnya.',
-                images: ['Foto1 (17).jpeg']
-            },
-            {
-                id: 'mem_18',
-                title: 'Hari Penuh Makna',
-                date: '2026-03-03',
-                category: 'Momen Spesial',
-                author: 'Sahabat Baik',
-                noteStyle: 'sticky-note-pink',
-                description: 'Setiap detik bersama adalah anugerah yang patut disyukuri.',
-                images: ['Foto1 (18).jpeg']
-            },
-            {
-                id: 'mem_19',
-                title: 'Kumpul Ceria',
-                date: '2026-03-04',
-                category: 'Nongkrong',
-                author: 'Tim Seru',
-                noteStyle: 'sticky-note-blue',
-                description: 'Tawa dan cerita selalu menghiasi setiap kali kita berkumpul.',
-                images: ['Foto1 (19).jpeg']
-            },
-            {
-                id: 'mem_20',
-                title: 'Kenangan Abadi',
-                date: '2026-03-05',
-                category: 'Momen Spesial',
-                author: 'Semuanya',
-                noteStyle: 'sticky-note-purple',
-                description: 'Terima kasih untuk semua cerita indah yang sudah kita ukir bersama dalam album kenangan ini.',
-                images: ['Foto1 (20).jpeg']
             }
         ];
 
@@ -479,10 +317,9 @@
                         </div>
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-[10px] font-semibold tracking-wider uppercase text-romanticRed bg-warmRose px-2 py-0.5 rounded-md">${memory.category || 'Momen'}</span>
-                            <span class="text-[10px] text-gray-400">${formatDate(memory.date)}</span>
+                            <span class="text-[10px] text-gray-400">From: ${memory.author}</span>
                         </div>
                         <h3 class="font-serif font-bold text-sm text-deepCharcoal group-hover:text-romanticRed transition line-clamp-1">${memory.title}</h3>
-                        <p class="text-xs text-romanticRed font-semibold mt-1">From: ${memory.author}</p>
                         ${memory.description ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">"${memory.description}"</p>` : ''}
                     </div>
                 </div>
@@ -499,21 +336,14 @@
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="text-[10px] text-romanticRed font-semibold bg-warmRose px-2 py-0.5 rounded-md">${memory.category}</span>
-                                <span class="text-[10px] text-gray-400"><i class="fa-regular fa-calendar"></i> ${formatDate(memory.date)}</span>
+                                <span class="text-[10px] text-gray-400">From: ${memory.author}</span>
                             </div>
                             <h3 class="font-serif font-bold text-sm text-deepCharcoal mb-1">${memory.title}</h3>
-                            <p class="text-xs font-semibold text-romanticRed mb-1">From: ${memory.author}</p>
                             <p class="text-xs text-gray-600 line-clamp-2">"${memory.description || ''}"</p>
                         </div>
                     </div>
                 </div>
             `;
-        }
-
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
         function filterCategory(cat) {
@@ -560,7 +390,6 @@
             document.getElementById('lightboxCategory').textContent = memory.category || 'Momen';
             document.getElementById('lightboxDate').querySelector('span').textContent = formatDate(memory.date);
             
-            // Set Sticky Note Author & Content & Style
             document.getElementById('lightboxNoteAuthor').textContent = `From: ${memory.author}`;
             document.getElementById('lightboxDescription').textContent = memory.description || 'Tidak ada catatan khusus.';
             
@@ -613,6 +442,12 @@
             if (activeImageIndex >= memory.images.length) activeImageIndex = 0;
 
             updateLightboxImage();
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         }
     </script>
 </body>
