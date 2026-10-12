@@ -27,7 +27,7 @@
     </script>
     
     <style>
-        /* === BASE THEMES (DIBUAT LEBIH REDUP & REDUP DEEP) === */
+        /* === BASE THEMES & ANIMATED BACKGROUNDS === */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
@@ -48,56 +48,106 @@
             background-size: 220px 220px;
         }
 
-        /* 2. Theme Cute Pastel (DIBUAT LEBIH REDUP / SOFT TWILIGHT PINK-PURPLE) */
+        /* 2. Theme Soft Pastel (Dimmed Twilight) */
         body.theme-pastel {
-            background-color: #1a1528; /* Soft Dark Violet/Dusty Twilight */
+            background-color: #1a1528;
             color: #f1eef9;
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.08) 0%, transparent 60%);
+                radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.1) 0%, transparent 60%);
         }
 
-        /* Ambient Animated Elements */
+        /* Ambient Animated Orbs */
         .orb-1 {
             transition: all 0.5s ease;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
         }
         body.theme-space .orb-1 {
-            background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(37,99,235,0.08) 50%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, rgba(37,99,235,0.08) 50%, rgba(0,0,0,0) 70%);
         }
         body.theme-pastel .orb-1 {
-            background: radial-gradient(circle, rgba(244, 114, 182, 0.2) 0%, rgba(168, 85, 247, 0.08) 50%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, rgba(168, 85, 247, 0.1) 50%, rgba(0,0,0,0) 70%);
         }
 
         .orb-2 {
             transition: all 0.5s ease;
+            animation: pulseGlow 8s ease-in-out infinite alternate;
         }
         body.theme-space .orb-2 {
-            background: radial-gradient(circle, rgba(236,72,153,0.25) 0%, rgba(168,85,247,0.08) 50%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(236,72,153,0.3) 0%, rgba(168,85,247,0.08) 50%, rgba(0,0,0,0) 70%);
         }
         body.theme-pastel .orb-2 {
-            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, rgba(192, 132, 252, 0.08) 50%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.25) 0%, rgba(192, 132, 252, 0.1) 50%, rgba(0,0,0,0) 70%);
         }
 
-        /* Floating Animation */
-        @keyframes floatingItem {
+        @keyframes pulseGlow {
+            0% { transform: scale(1) translateY(0); opacity: 0.7; }
+            100% { transform: scale(1.15) translateY(-15px); opacity: 0.9; }
+        }
+
+        /* Floating Animated Elements */
+        @keyframes floatSlow {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
-        .animate-float {
-            animation: floatingItem 4s ease-in-out infinite;
+        @keyframes floatFast {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(-8deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float-slow { animation: floatSlow 5s ease-in-out infinite; }
+        .animate-float-fast { animation: floatFast 3.5s ease-in-out infinite; }
+
+        /* Fancy Buttons Styling */
+        .btn-fancy-primary {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            color: #0f172a;
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.25), 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .btn-fancy-primary:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 18px 30px -5px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-fancy-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            color: #ffffff;
+            border: 2px solid rgba(52, 211, 153, 0.6);
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .btn-fancy-secondary:hover {
+            transform: translateY(-4px) scale(1.03);
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.9);
+            box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
         }
 
         /* Sticky Notes Styling */
         .sticky-note {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             color: #1e293b;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
         .sticky-note:hover {
-            transform: translateY(-5px) rotate(0deg) scale(1.02) !important;
+            transform: translateY(-6px) rotate(0deg) scale(1.02) !important;
             z-index: 10;
+            box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.6);
         }
 
         .note-yellow { background: #fef08a; }
@@ -112,11 +162,12 @@
             background: #ffffff;
             padding: 12px 12px 24px 12px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
         }
         .polaroid:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-10px) rotate(0deg) scale(1.03);
+            box-shadow: 0 25px 35px rgba(0,0,0,0.6);
         }
 
         /* Page Transitions */
@@ -137,16 +188,21 @@
 </head>
 <body class="theme-space relative flex flex-col justify-between min-h-screen">
 
-    <!-- Glowing Orbs (Soft Redup) -->
-    <div class="fixed top-12 -left-12 w-64 h-64 rounded-full orb-1 blur-2xl pointer-events-none"></div>
-    <div class="fixed top-1/3 -right-16 w-72 h-72 rounded-full orb-2 blur-3xl pointer-events-none"></div>
+    <!-- Ambient Glowing Orbs -->
+    <div class="fixed top-12 -left-12 w-72 h-72 rounded-full orb-1 blur-3xl pointer-events-none"></div>
+    <div class="fixed top-1/3 -right-16 w-80 h-80 rounded-full orb-2 blur-3xl pointer-events-none"></div>
+
+    <!-- Floating Background Animations -->
+    <div class="fixed top-1/4 left-8 text-2xl opacity-60 pointer-events-none animate-float-slow">✨</div>
+    <div class="fixed bottom-1/4 right-10 text-3xl opacity-60 pointer-events-none animate-float-fast">🚀</div>
+    <div class="fixed top-2/3 left-12 text-2xl opacity-50 pointer-events-none animate-float-fast">⭐</div>
 
     <!-- MAIN CONTAINER -->
     <div class="max-w-3xl mx-auto px-4 py-8 w-full z-10 flex-1 flex flex-col justify-center">
 
         <!-- TOGGLE THEME BUTTON (KANAN ATAS) -->
         <div class="flex justify-end mb-4">
-            <button onclick="toggleTheme()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-xs font-medium border border-white/15 backdrop-blur-md shadow-lg transition flex items-center gap-2">
+            <button onclick="toggleTheme()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold border border-white/20 backdrop-blur-md shadow-lg transition flex items-center gap-2 hover:scale-105 active:scale-95">
                 <span id="themeIcon">🌌</span>
                 <span id="themeLabel">Tema: Deep Space</span>
             </button>
@@ -156,8 +212,13 @@
         <section id="pageHome" class="page-section page-active text-center my-auto py-6">
             
             <div class="relative max-w-sm mx-auto mb-6">
-                <div class="absolute -left-2 top-4 w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500/80 to-purple-600/80 flex items-center justify-center text-white text-xl shadow-lg animate-float">
+                <!-- Floating Animated Movie Icon -->
+                <div class="absolute -left-2 top-2 w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white text-2xl shadow-xl shadow-pink-500/30 animate-float-fast">
                     🎬
+                </div>
+                <!-- Floating Sparkle Badge -->
+                <div class="absolute right-0 top-0 text-xl animate-float-slow">
+                    💫
                 </div>
                 
                 <h1 class="text-4xl sm:text-5xl font-serif font-extrabold tracking-wide text-white leading-tight pt-4">
@@ -169,13 +230,14 @@
                 Terima kasih telah menjadi bagian dari perjalanan, cerita, tawa, dan kenangan indah yang tidak akan pernah terlupakan.
             </p>
 
-            <div class="flex flex-col gap-4 max-w-xs mx-auto">
-                <button onclick="switchPage('pageMessages')" class="w-full py-3.5 px-6 rounded-full bg-white text-black font-serif font-bold text-base shadow-xl hover:bg-gray-100 active:scale-95 transition flex items-center justify-center gap-2">
-                    <span>Message for you</span>
+            <!-- Navigation Buttons dengan Efek Menarik -->
+            <div class="flex flex-col gap-5 max-w-xs mx-auto">
+                <button onclick="switchPage('pageMessages')" class="btn-fancy-primary w-full py-4 px-6 rounded-full font-serif font-bold text-base flex items-center justify-center gap-3 active:scale-95">
+                    <span>💌 Message for you</span>
                 </button>
 
-                <button onclick="switchPage('pageMemories')" class="w-full py-3.5 px-6 rounded-full bg-white text-black font-serif font-bold text-base shadow-xl hover:bg-gray-100 active:scale-95 transition flex items-center justify-center gap-2 border-2 border-emerald-400">
-                    <span>Our memories</span>
+                <button onclick="switchPage('pageMemories')" class="btn-fancy-secondary w-full py-4 px-6 rounded-full font-serif font-bold text-base flex items-center justify-center gap-3 active:scale-95">
+                    <span>📸 Our memories</span>
                 </button>
             </div>
         </section>
@@ -184,20 +246,24 @@
         <section id="pageMessages" class="page-section page-hidden my-auto">
             
             <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
-                <div>
-                    <h2 class="text-2xl font-serif font-bold text-white">💌 Message For You</h2>
-                    <p class="text-xs text-gray-400">Pesan & kesan dari teman-teman</p>
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl animate-float-fast">💌</span>
+                    <div>
+                        <h2 class="text-2xl font-serif font-bold text-white">Message For You</h2>
+                        <p class="text-xs text-gray-400">Pesan & kesan dari teman-teman</p>
+                    </div>
                 </div>
-                <button onclick="switchPage('pageHome')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-2 border border-white/20 transition">
+                <button onclick="switchPage('pageHome')" class="btn-back px-4 py-2 rounded-full text-white text-xs font-semibold flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> Keluar / Back
                 </button>
             </div>
 
+            <!-- Sticky Notes Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
                 
                 <!-- Cantika -->
                 <div class="sticky-note note-pink p-5 rounded-2xl rotate-1 relative">
-                    <div class="w-3 h-3 bg-red-400 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-red-400 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-pink-950 mb-2 border-b border-pink-900/20 pb-1">From: Cantika</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed italic text-gray-800">
                         “terima kasih terima kasih dan terima kasih kak juan, God bless di manapun, intinya inpo loker.” ~ from cancan:,)
@@ -206,7 +272,7 @@
 
                 <!-- Jimi -->
                 <div class="sticky-note note-yellow p-5 rounded-2xl -rotate-1 relative sm:col-span-2">
-                    <div class="w-3 h-3 bg-amber-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-amber-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-amber-950 mb-2 border-b border-amber-900/20 pb-1">From: Jimi</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed text-gray-800 whitespace-pre-line">
 Yo Kak, bertahun tahun kita udah jalan bareng di CG sampe kk jadi CGL .
@@ -227,7 +293,7 @@ GodBlessYu🤍
 
                 <!-- Aris -->
                 <div class="sticky-note note-green p-5 rounded-2xl rotate-2 relative">
-                    <div class="w-3 h-3 bg-emerald-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-emerald-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-emerald-950 mb-2 border-b border-emerald-900/20 pb-1">From: Aris</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed text-gray-800">
                         Semangat buat perjalanan barunya ya, Kak Juan! 🔥<br><br>
@@ -237,7 +303,7 @@ GodBlessYu🤍
 
                 <!-- Delo -->
                 <div class="sticky-note note-blue p-5 rounded-2xl -rotate-2 relative">
-                    <div class="w-3 h-3 bg-blue-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-blue-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-blue-950 mb-2 border-b border-blue-900/20 pb-1">From: Delo</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed text-gray-800">
                         wadoopp pak WL CGL suda pergi dri bpp 🥹<br><br>
@@ -249,7 +315,7 @@ GodBlessYu🤍
 
                 <!-- Rendy -->
                 <div class="sticky-note note-purple p-5 rounded-2xl rotate-1 relative sm:col-span-2">
-                    <div class="w-3 h-3 bg-purple-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-purple-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-purple-950 mb-2 border-b border-purple-900/20 pb-1">From: Rendy</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed text-gray-800">
                         makasih banyak ya, Bang, sudah jadi leader yang sabar, baik, dan selalu mau membimbing aku untuk jadi pribadi yang lebih baik, bahkan di saat aku sering nggak punya waktu untuk ikut CG karena kesibukanku, Bang Juan tetap sabar dan nggak pernah berhenti kasih masukan, aku benar-benar bersyukur bisa kenal dan punya leader seperti Bang Juan, sedih pasti karena ke depannya mungkin nggak bisa sesering dulu ketemu, tapi aku berdoa semoga Tuhan selalu menyertai setiap langkah Bang Juan di Jakarta, melancarkan pekerjaan dan setiap rencana Bang Juan, dan semoga di mana pun Bang Juan berada, Bang Juan tetap jadi berkat bagi banyak orang seperti yang sudah Bang Juan lakukan buat kami di sini, Tuhan memberkati selalu ya, Bang Juan. ❤️🙏🏻
@@ -258,7 +324,7 @@ GodBlessYu🤍
 
                 <!-- Marion -->
                 <div class="sticky-note note-orange p-5 rounded-2xl -rotate-1 relative sm:col-span-2">
-                    <div class="w-3 h-3 bg-orange-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
+                    <div class="w-3.5 h-3.5 bg-orange-500 rounded-full absolute top-3 right-3 shadow-inner"></div>
                     <h3 class="font-bold text-sm text-amber-950 mb-2 border-b border-amber-900/20 pb-1">From: Marion</h3>
                     <p class="text-xs sm:text-sm font-medium leading-relaxed text-gray-800">
                         Selamat berjuang sobat Juan yang kadang kembaran baju, Goodluck sukses dan Take Care disana ju. God bless sobat
@@ -268,7 +334,7 @@ GodBlessYu🤍
             </div>
 
             <div class="text-center pb-6">
-                <button onclick="switchPage('pageHome')" class="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-xs shadow-lg hover:bg-gray-200 transition inline-flex items-center gap-2">
+                <button onclick="switchPage('pageHome')" class="btn-back px-6 py-2.5 rounded-full text-white font-semibold text-xs inline-flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama
                 </button>
             </div>
@@ -277,16 +343,19 @@ GodBlessYu🤍
         <!-- ================= PAGE 3: OUR MEMORIES ================= -->
         <section id="pageMemories" class="page-section page-hidden my-auto">
             <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
-                <div>
-                    <h2 class="text-2xl font-serif font-bold text-white">📸 Our Memories</h2>
-                    <p class="text-xs text-gray-400">Klik foto untuk melihat ukuran penuh</p>
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl animate-float-slow">📸</span>
+                    <div>
+                        <h2 class="text-2xl font-serif font-bold text-white">Our Memories</h2>
+                        <p class="text-xs text-gray-400">Klik foto untuk melihat ukuran penuh</p>
+                    </div>
                 </div>
-                <button onclick="switchPage('pageHome')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-2 border border-white/20 transition">
+                <button onclick="switchPage('pageHome')" class="btn-back px-4 py-2 rounded-full text-white text-xs font-semibold flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> Keluar / Back
                 </button>
             </div>
 
-            <!-- Grid 20 Foto -->
+            <!-- Grid 20 Foto Polaroid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
                 <div class="polaroid rounded-xl text-center rotate-1" onclick="openPhotoModal('file foto/Foto1.jpeg', 'Special Moments ✨')"><div class="w-full h-56 bg-gray-100 rounded-lg overflow-hidden mb-3"><img src="file foto/Foto1.jpeg" class="w-full h-full object-cover"></div><p class="font-handwriting text-xl text-gray-700 font-bold">Special Moments ✨</p></div>
                 <div class="polaroid rounded-xl text-center -rotate-2" onclick="openPhotoModal('file foto/Foto2.jpeg', 'Togetherness 🤍')"><div class="w-full h-56 bg-gray-100 rounded-lg overflow-hidden mb-3"><img src="file foto/Foto2.jpeg" class="w-full h-full object-cover"></div><p class="font-handwriting text-xl text-gray-700 font-bold">Togetherness 🤍</p></div>
@@ -311,7 +380,7 @@ GodBlessYu🤍
             </div>
 
             <div class="text-center pb-6">
-                <button onclick="switchPage('pageHome')" class="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-xs shadow-lg hover:bg-gray-200 transition inline-flex items-center gap-2">
+                <button onclick="switchPage('pageHome')" class="btn-back px-6 py-2.5 rounded-full text-white font-semibold text-xs inline-flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama
                 </button>
             </div>
@@ -349,7 +418,7 @@ GodBlessYu🤍
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Toggle Background Theme (Space vs Dimmed Cute Pastel)
+        // Toggle Background Theme (Space vs Soft Pastel)
         let isPastel = false;
         function toggleTheme() {
             isPastel = !isPastel;
